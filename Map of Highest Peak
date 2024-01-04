@@ -1,0 +1,40 @@
+//Goldman Sachs Problem 11
+
+class Solution {
+public:
+    vector<vector<int>> highestPeak(vector<vector<int>>& matrix) {
+        int R=matrix.size();
+        int C=matrix[0].size();
+        vector<vector<int>>grid(R,vector<int>(C,INT_MAX));
+        queue<pair<int,int>>q;
+
+        for(int i=0;i<R;i++){
+            for(int j=0;j<C;j++){
+                if(matrix[i][j]==1){
+                    q.push({i,j});
+                    grid[i][j]=0;
+                }
+            }
+        }
+        while(!q.empty()){
+            int r=q.front().first;
+            int c=q.front().second;
+            q.pop();
+            int dr[4]{0,0,-1,1};
+            int dc[4]={-1,1,0,0};
+
+            for(int i=0;i<4;i++){
+                int rr=r+dr[i];
+                int cc=c+dc[i];
+
+                if (rr >= 0 && rr < R && cc >= 0 && cc < C && grid[rr][cc] > 1 + grid[r][c]) {
+                grid[rr][cc] = 1 + grid[r][c];
+                q.push({rr, cc});
+}
+
+            }
+        }
+            return grid;
+
+    }
+};
