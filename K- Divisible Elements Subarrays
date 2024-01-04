@@ -1,0 +1,25 @@
+//Goldman Sachs Problem 10
+
+class Solution {
+public:
+    int countDistinct(vector<int>& nums, int k, int p) {
+        unordered_set<string> set;
+
+        for (int i = 0; i < nums.size(); ++i) {
+            int count = 0;
+            string subarray;
+            for (int j = i; j < nums.size(); ++j) {
+                if (nums[j] % p == 0) {
+                    count++;
+                }
+                if (count > k) {
+                    break;
+                }
+                subarray += to_string(nums[j]) + "_";
+                set.insert(subarray);
+            }
+        }
+
+        return set.size();
+    }
+};
