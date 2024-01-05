@@ -1,0 +1,21 @@
+//Goldman Sachs Problem 14
+
+string encode(string src)
+{
+    int n = src.size();
+    string s = "";
+    int count = 1;
+    for (int i = 1; i <= n - 1; i++)
+    {
+        if (src[i] == src[i - 1])
+            count = count + 1;
+        else
+        {
+            s += src[i - 1];
+            s += to_string(count);
+            count = 1;
+        }
+    }
+    s += src[n - 1];
+    return s + to_string(count);
+}
