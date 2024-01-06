@@ -1,0 +1,18 @@
+//Microsoft Problem1
+
+class Solution {
+private:
+    int dist(int a1,int a2,int x){
+        if(x<a1)
+            return std::abs(a1-x);
+        if(x>a2)
+            return std::abs(x-a2);
+        return 0;
+    } 
+public:
+    bool checkOverlap(int radius, int xCenter, int yCenter, int x1, int y1, int x2, int y2) {
+     int a=dist(x1,x2,xCenter);
+     int b=dist(y1,y2,yCenter);  
+     return(a*a+b*b)<=(radius*radius); 
+    }
+};
