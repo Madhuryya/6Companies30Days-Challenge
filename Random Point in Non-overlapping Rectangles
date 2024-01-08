@@ -1,0 +1,42 @@
+//Microsoft Problem 6
+
+class Solution {
+public:
+    Solution(vector<vector<int>>& rects) {
+       this->rects=rects;
+       total=0;
+       for(const auto&rect:rects){
+           total+=(rect[2]-rect[0]+1)*(rect[3]-rect[1]+1);
+           sum.push_back(total);
+       } 
+    }
+    
+    vector<int> pick() {
+     int target=rand()%total;
+     int lo=0,hi=rects.size()-1;
+     while(lo<hi){
+         int mid=lo+(hi-lo)/2;
+
+         if(target>=sum[mid]){
+             lo=mid+1;
+         }else{
+             hi=mid;
+         }
+     } 
+     const auto&rect=rects[lo];
+     int x1=rect[0];
+     int y1=rect[1];
+     int x2=rect[2];
+     int y2=rect[3];
+
+     int x=std::rand()%(x2-x1+1);
+     int y=std::rand()%(y2-y1+1);
+
+     return{x1+x,y1+y};
+    }
+    private:
+    std::vector<std::vector<int>>rects;
+    int total;
+    std::vector<int>sum;
+};
+
