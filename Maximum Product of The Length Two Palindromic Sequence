@@ -1,0 +1,49 @@
+//Microsoft Problem 12
+
+#include <cstdint>
+
+
+
+class Solution {
+public:
+    int maxProduct(string a) {
+        int n = a.length();
+        int64_t ans = 0;  
+
+        for (int i = 0; i < (1 << n); i++) {
+            string x = "", y = "";
+            for (int j = 0; j < n; j++) {
+                if ((1 << j) & i)
+                    x += a[j];
+                else
+                    y += a[j];
+            }
+            ans = max(ans, static_cast<int64_t>(answer(x)) * static_cast<int64_t>(answer(y)));
+        }
+        return static_cast<int>(ans);  
+    }
+
+private:
+    int answer(string a) {
+        string ss = a;
+        reverse(ss.begin(), ss.end());
+        return maxProductHelper(a, ss);
+    }
+
+    int maxProductHelper(string s, string t) {
+        int n = s.length(), m = t.length();
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (s[i - 1] == t[j - 1])
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                else
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+        return dp[n][m];
+    }
+};
+
+
