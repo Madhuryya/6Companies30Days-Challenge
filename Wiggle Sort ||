@@ -1,0 +1,19 @@
+//Microsoft Problem 13
+
+class Solution {
+public:
+    void wiggleSort(std::vector<int>& nums) {
+        std::vector<int> vals(nums);
+        std::sort(vals.begin(), vals.end());
+
+        int idx = nums.size() - 1;
+
+        for (int i = 1; i < nums.size(); i += 2) {
+            nums[i] = vals[idx--];
+        }
+
+        for (int i = 0; i < nums.size(); i += 2) {
+            nums[i] = vals[idx--];
+        }
+    }
+};
